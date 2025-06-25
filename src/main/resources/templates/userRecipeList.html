@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/userRecipeList.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::header}"></header>
+    <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
+    <div class="board-wrap">
+      <h2>유저 레시피 게시판</h2>
+      <div class="sidebar-wrap">
+        <div th:replace="~{fragments/sideNav::sidebar}" />
+      </div>
+      <div class="table_wrap">
+        <div class="sort-buttons">
+          <a href="/Wimr/userRecipes">최신순</a>
+          <a th:href="@{/Wimr/userRecipes?sort=viewCount}"
+          class="button"
+          th:classappend="${sort == 'viewCount'} ? 'active' : ''">조회순</a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>요리</th>
+              <th>글제목</th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회수</th>
+            </tr>
+          </thead>
+          <tbody th:if="${list != null}">
+            <tr th:each="userrecipe : ${list}">
+              <td th:text="${userrecipeStat.index+1}"></td>
+              <td>
+                <div >
+                  <img th:src="${recipeMap[userrecipe.recipeno].picture}" alt="Recipe Image" />
+                </div>
+              </td>
+
+              <td>
+                <a
+                  th:text="${recipeMap[userrecipe.recipeno].title}"
+                  th:href="'/Wimr/recipe/usermade/'+${userrecipe.recipeno}"
+                ></a>
+              </td>
+              <td>
+                <a th:href="'/Wimr/myPage/'+ ${userrecipe.nickname}" ><span th:text="${userrecipe.nickname}"></span></a>
+              </td>
+              <td
+                th:text="${#dates.format(userrecipe.time, 'yyyy-MM-dd')}"
+              ></td>
+              <td th:text="${userrecipe.viewCount}">조회수</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="registerBtn">
+          <a th:href="@{/myrecipeRegister}">레시피 등록</a>
+        </div>
+        <div class="pages">
+          <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+            <!-- 페이지가 현재 페이지와 다를 때 -->
+            <a
+              th:if="${page != nowPage}"
+              th:href="@{/Wimr/userRecipes(page = ${page-1})}"
+              th:text="${page}"
+            ></a>
+            <!-- 페이지가 현재 페이지와 같을 때 -->
+            <strong
+              th:if="${page == nowPage}"
+              th:text="${page}"
+              style="color: red"
+            ></strong>
+          </th:block>
+        </div>
+      </div>
+    </div>
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  </body>
+</html>

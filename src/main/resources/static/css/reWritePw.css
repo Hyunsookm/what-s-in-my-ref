@@ -1,0 +1,12 @@
+#reWritePw-div{
+    width: 100%;
+    flex-direction: column;
+}
+
+.Error{
+    visibility: hidden; 
+    display: none;
+    color: rgb(253, 0, 0);
+    font-size: 15px;
+    margin:0;
+}

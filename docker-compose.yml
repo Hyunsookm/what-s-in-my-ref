@@ -1,0 +1,41 @@
+services:
+  database:
+    image: mysql:8.0.38
+    restart: always
+    container_name: "database"
+    environment:
+      MYSQL_DATABASE: wimr
+      MYSQL_ROOT_PASSWORD: 1q2w3e4r!
+#    volumes:
+#      - ./db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - springboot
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    container_name: "spring"
+    environment:
+      SPRING_DATASOURCE_URL : jdbc:mysql://database:3306/wimr?&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1q2w3e4r!
+    restart: always
+    networks:
+      - springboot
+
+networks:
+    springboot:
+      driver: bridge
+
+
+
+
+
+

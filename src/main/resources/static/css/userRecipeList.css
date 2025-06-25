@@ -1,0 +1,65 @@
+h2 {
+  padding: 70px 0 50px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  border: 1px solid black;
+  border-width: 1px 0 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid black;
+  border-width: 0 0 1px;
+  padding: 5px 0;
+  text-align: center;
+}
+
+.table_wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 60px;
+}
+
+.table_wrap th {
+  background-color: #ddd;
+}
+
+.sort-buttons {
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+}
+
+tbody img {
+  width: 80px;
+  height: 80px;
+}
+
+.pages {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.registerBtn {
+  margin: 8px;
+  text-align: right;
+}
+
+.registerBtn a {
+  display: inline-block;
+  background-color: skyblue;
+  color: white;
+  padding: 4px;
+}
+
+.registerBtn a:hover {
+  background-color: rgb(70, 70, 196);
+  transition: 0.2s ease;
+}

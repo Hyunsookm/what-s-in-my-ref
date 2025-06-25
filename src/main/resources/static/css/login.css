@@ -1,0 +1,30 @@
+/*로그인*/
+.centerBox {
+  height: 100vh;
+  min-height: 600px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-wrap{
+  width: 100%;
+}
+
+
+#loginBox button {
+  background-color: rgb(241, 56, 56);
+  display: inline-block;
+}
+
+
+
+.centerBox .link-div{
+  width:100%;
+  text-align: right;
+}
+
+.centerBox .link-div a{
+  margin: 10px ;
+  font-size: small;
+}

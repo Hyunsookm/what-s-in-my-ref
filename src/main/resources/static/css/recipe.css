@@ -1,0 +1,162 @@
+
+
+/*recipe css*/
+/* #recipeBody {
+} */
+
+
+
+.container {
+  text-align: center;
+}
+
+.recipe_container {
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 1500px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 13px -1px rgb(12, 12, 12);
+}
+
+#foodImg {
+  width: 100%;
+  height: 650px;
+  /*background-image: url("[[${foodImg}]]");*/
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center;
+  border-radius: 20px 20px 20px 20px;
+
+  #blur {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.151);
+    position: relative;
+    z-index: 0;
+    border-radius: 20px;
+  }
+}
+
+
+#recommend-and-scrap #recommend{
+  padding-top: 4px;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius:0 0 10px 10px ;
+  background-color: rgba(255, 255, 255, 0.712);
+}
+
+#recommend-and-scrap #recommend .recommend-count{
+  font-size: 28px;
+}
+
+.recipe_container #foodImg #blur #recommend-and-scrap{
+  justify-content: right;
+  margin-right: 20px;
+}
+
+.recipe_container #foodImg #blur #recommend-and-scrap svg{
+  
+  cursor: pointer;
+}
+
+#scrap div{
+  position: relative;
+  bottom:2px;
+}
+
+#foodName {
+  width: 70%;
+  border-radius: 30%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  font-size: 90px;
+  color: aliceblue;
+  word-break: keep-all;
+
+}
+
+.recipe_container ul li {
+  text-align: left;
+}
+
+#recipeDetail .manualImg-wrap{
+  width:40%;
+  object-fit: contain;
+  object-position: center;
+}
+
+#recipeDetail .manualImg-wrap img{
+  width: 100%;
+}
+
+section.comment{
+  width:100%;
+}
+
+div.card{
+  width: 85%;
+}
+
+.comment .card .card-body #user-info{
+  margin-bottom: 5px;
+}
+
+.comment .card .card-body form #commentContentInput{
+  margin-bottom: 4px;
+}
+
+.comment .card .card-body form .comment-sub-wrap{
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment .card .card-body form .comment-sub-wrap #comment-btn-wrap{
+  width:9%;
+  align-items: center;
+  --pico-form-element-spacing-vertical: 0.4rem;
+  --pico-form-element-spacing-horizontal: 0.6rem;
+  
+}
+
+.comment .card .card-body form #comment-submit-btn{
+  width:100%;
+  font-size: small;
+  
+}
+
+.comment .card .card-body form #char-count{
+  margin-left: 5px;
+  color:grey;
+}
+
+.comment .card .card-body .comment-box{
+  margin-bottom: 25px;
+}
+
+.comment .card .card-body .comments-box .commenter{
+  justify-content: space-between;
+}
+
+
+.comment .card .card-body .comments-box .commenter .name{
+  margin-left: 7px; 
+  
+  color:rgba(51, 51, 51, 0.842);
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.comment .card .card-body .comments-box .commenter .date{
+  font-size:13px;
+  padding-top: 10px; 
+}
+
+.comment .card .card-body .comments-box .comment-main-area .comment-content{
+  font-size:23px;
+}

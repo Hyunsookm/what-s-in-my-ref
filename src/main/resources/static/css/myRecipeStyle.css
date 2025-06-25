@@ -1,0 +1,53 @@
+h2 {
+  padding: 70px 0 30px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+#myRecipe {
+  border: 2px solid black;
+  border-left: none;
+  border-right: none;
+  margin: 0 200px;
+  /* display: flex;
+  justify-content: center; */
+}
+
+form input {
+  width: 100%;
+  height: 40px;
+}
+
+.send {
+  float: right;
+  padding: 8px;
+  margin: 8px 0;
+  background-color: skyblue;
+  border: none;
+  color: white;
+  font-size: medium;
+}
+
+.send:hover {
+  background-color: rgb(70, 70, 196);
+  transition: 0.2s ease;
+}
+
+#mainImg,
+#RCP_NM,
+#RCP_IG,
+#RCP_STEP,
+#RCP_TIP {
+  background-color: #ddd;
+}
+
+table {
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  height: 400px;
+  resize: none;
+}

@@ -1,0 +1,40 @@
+.centerBox {
+  display: flex;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-wrap {
+  width: 100%;
+}
+
+#registerBox button {
+  background-color: rgb(241, 56, 56);
+  box-shadow: none;
+  transition: 0.08s;
+  width: 100%;
+}
+
+#registerBox button:active {
+  box-shadow: 0 0 5px rgb(131, 0, 0);
+}
+
+#register-form .input-wrap {
+  margin-bottom: 9px;
+  &:last-of-type {
+    margin-bottom: 35px;
+  }
+}
+
+#register-form li {
+  padding: 0;
+  list-style-type: disc;
+}
+
+.Error {
+  visibility: hidden;
+  display: none;
+  color: rgb(253, 0, 0);
+  font-size: 15px;
+  margin: 0;
+}

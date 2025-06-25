@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" th:href="@{css/boardFormStyle.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::header}"></header>
+    <div class="sidebar-wrap">
+      <div th:replace="~{fragments/sideNav::sidebar}" />
+    </div>
+    <h2><a href="boardList">게시판</a></h2>
+    <div class="form-wrap">
+      <form
+        id="writeForm"
+        method="post"
+        action="/board/writePro"
+        onsubmit="return validateForm()"
+      >
+        <table>
+          <tr>
+            <td>제목</td>
+            <td>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="제목을 입력하세요"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>작성자</td>
+            <td th:if="${session.user} != null">
+              <input
+                type="text"
+                id="nickname"
+                name="nickname"
+                th:value="${session.user.memberNick}"
+                readonly
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>내용</td>
+            <td colspan="2">
+              <textarea
+                id="content"
+                name="content"
+                placeholder="내용을 입력하세요"
+              ></textarea>
+            </td>
+          </tr>
+        </table>
+        <div class="btn">
+          <input type="submit" id="submit" value="등록" />
+          <a href="boardList" id="cancel">취소</a>
+        </div>
+      </form>
+    </div>
+    <div th:if="${errorMessage}">
+      <script th:inline="javascript">
+        alert(/*[[${errorMessage}]]*/);
+        location.replace(/*[[${searchUrl}]]*/);
+      </script>
+    </div>
+    <script>
+      function validateForm() {
+        const title = document.getElementById("title").value.trim();
+        const nickname = document.getElementById("nickname").value.trim();
+        const content = document.getElementById("content").value.trim();
+
+        if (!title || !nickname || !content) {
+          alert("모든 필드를 입력해 주세요.");
+          return false;
+        }
+        return true;
+      }
+    </script>
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  </body>
+</html>

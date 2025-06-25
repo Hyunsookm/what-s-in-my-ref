@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/foodSelectStyle.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::header}"></header>
+    <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
+    <div class="emptyBox"></div>
+    <h2 class="selectTitle">레시피 검색</h2>
+    <div id="overlayForLoading" class="overlayForLoading"></div>
+    
+    <div class="food_list">
+      <div class="food_search">
+        <input
+          type="text"
+          id="search"
+          placeholder="재료 입력"
+          autocomplete="off"
+        />
+        <!-- 로딩 화면 -->
+        <div class="loader" id="loader">
+          <img src="/img/Bean Eater@1x-1.0s-200px-200px.gif" alt="Loading...">
+        </div>
+        <button type="button" id="searchBtn">추가</button>
+        <button type="button" id="findRecipeBtn">검색</button>
+      </div>
+      <!-- 자동완성 단어 리스트 -->
+      <div class="autocomplete"></div>
+      <!-- 선택한 재료 -->
+      <div class="selectedFood">
+        <p>선택한 재료 <span style="color: #aaa; font-size: small; text-decoration: underline;">(재료를 누르면 선택취소가 가능합니다)</span></p>
+        <div class="addedlist"></div>
+      </div>
+      
+      <div class="all_food">
+        <!-- 고기 체크박스 -->
+        <div class="food_item">
+          
+          <div class="item_title">
+            <img class="food_img" src="/img/meat.png" alt="고기">
+            고기
+          </div>
+          <div class="item_content">
+            <ul class="meat_item">
+              <li class="meat">
+                <label title="돼지고기">
+                  <input
+                  type="checkbox"
+                  class="checkbox"
+                  value="돼지고기"
+                  name="고기"
+                  />
+                  <img class="food_img" src="/img/pig.png" alt="돼지고기">
+                  돼지고기
+                </label>
+              </li>
+              <li class="meat">
+                <label title="소고기">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="소고기"
+                    name="고기"
+                  />
+                  <img class="food_img" src="/img/beef.png" alt="소고기">
+                  소고기
+                </label>
+              </li>
+              <li class="meat">
+                <label title="닭고기">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="닭고기"
+                    name="고기"
+                  />
+                  <img class="food_img" src="/img/chicken.png" alt="닭고기">
+                  닭고기
+                </label>
+              </li>
+              <li class="meat">
+                <label title="오리고기">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="오리고기"
+                    name="고기"
+                  />
+                  <img class="food_img" src="/img/duck.png" alt="오리고기">
+                  오리고기
+                </label>
+              </li>
+              <li class="meat">
+                <label title="양고기">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="양고기"
+                    name="고기"
+                    />
+                    <img class="food_img" src="/img/lamb.png" alt="양고기">
+                  양고기
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 채소 체크박스 -->
+        <div class="food_item">
+          <div class="item_title">
+            <img class="food_img" src="/img/vegetable.png" alt="채소">
+            채소
+          </div>
+          <div class="item_content">
+            <ul class="vegetable_item">
+              <li class="vegetable">
+                <label title="오이">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="오이"
+                    name="채소"
+                  />
+                  <img class="food_img" src="/img/cucumber.png" alt="오이">
+                  오이
+                </label>
+              </li>
+              <li class="vegetable">
+                <label title="당근">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="당근"
+                    name="채소"
+                  />
+                  <img class="food_img" src="/img/carrot.png" alt="당근">
+                  당근
+                </label>
+              </li>
+              <li class="vegetable">
+                <label title="감자">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="감자"
+                    name="채소"
+                  />
+                  <img class="food_img" src="/img/potato.png" alt="감자">
+                  감자
+                </label>
+              </li>
+              <li class="vegetable">
+                <label title="고구마">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="고구마"
+                    name="채소"
+                  />
+                  <img class="food_img" src="/img/sweetpotato.png" alt="고구마">
+                  고구마
+                </label>
+              </li>
+              <li class="vegetable">
+                <label title="양파">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="양파"
+                    name="채소"
+                  />
+                  <img class="food_img" src="/img/onion.png" alt="양파">
+                  양파
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 과일 체크박스 -->
+        <div class="food_item">
+          <div class="item_title">
+            <img class="food_img" src="/img/fruit.png" alt="과일">
+            과일
+          </div>
+          <div class="item_content">
+            <ul class="fruit_item">
+              <li class="fruit">
+                <label title="사과">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="사과"
+                    name="과일"
+                  />
+                  <img class="food_img" src="/img/apple.png" alt="사과">
+                  사과
+                </label>
+              </li>
+              <li class="fruit">
+                <label title="배">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="배"
+                    name="과일"
+                  />
+                  <img class="food_img" src="/img/pear.png" alt="배">
+                  배
+                </label>
+              </li>
+              <li class="fruit">
+                <label title="딸기">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="딸기"
+                    name="과일"
+                  />
+                  <img class="food_img" src="/img/strawberry.png" alt="딸기">
+                  딸기
+                </label>
+              </li>
+              <li class="fruit">
+                <label title="수박">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="수박"
+                    name="과일"
+                  />
+                  <img class="food_img" src="/img/watermelon.png" alt="수박">
+                  수박
+                </label>
+              </li>
+              <li class="fruit">
+                <label title="포도">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="포도"
+                    name="과일"
+                  />
+                  <img class="food_img" src="/img/grape.png" alt="포도">
+                  포도
+                </label>
+              </li>
+            </ul>
+            
+          </div>
+        </div>
+
+        <!-- 해산물 체크박스 -->
+        <div class="food_item">
+          <div class="item_title">
+            <img class="food_img" src="/img/seafood.png" alt="해산물">  
+            해산물
+          </div>
+          <div class="item_content">
+            <ul class="seafood_item">
+              <li class="seafood">
+                <label title="새우">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="새우"
+                    name="해산물"
+                  />
+                  <img class="food_img" src="/img/shrimp.png" alt="새우">
+                  새우
+                </label>
+              </li>
+              <li class="seafood">
+                <label title="고등어">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="고등어"
+                    name="해산물"
+                  />
+                  
+                  <img class="food_img" src="/img/mackerel.png" alt="고등어">
+                  고등어
+                </label>
+              </li>
+              <li class="seafood">
+                <label title="참치">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="참치"
+                    name="해산물"
+                  />
+                  <img class="food_img" src="/img/tuna.png" alt="참치">
+                  참치
+                </label>
+              </li>
+              <li class="seafood">
+                <label title="오징어">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="오징어"
+                    name="해산물"
+                  />
+                  <img class="food_img" src="/img/squid.png" alt="오징어">
+                  오징어
+                </label>
+              </li>
+              <li class="seafood">
+                <label title="조개">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="조개"
+                    name="해산물"
+                  />
+                  <img class="food_img" src="/img/seashell.png" alt="조개">
+                  조개
+                </label>
+              </li>
+            </ul>
+            
+          </div>
+        </div>
+
+        <!-- 유제품 체크박스 -->
+        <div class="food_item">
+          <div class="item_title">
+            <img class="food_img" src="/img/dairy.png" alt="유제품">  
+            유제품
+          </div>
+          <div class="item_content">
+            <ul class="dairy_item">
+              <li class="dairy">
+                <label title="우유">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="우유"
+                    name="유제품"
+                  />
+                  <img class="food_img" src="/img/milk.png" alt="우유">
+                  우유
+                </label>
+              </li>
+              <li class="dairy">
+                <label title="치즈">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="치즈"
+                    name="유제품"
+                  />
+                  <img class="food_img" src="/img/cheese.png" alt="치즈">
+                  치즈
+                </label>
+              </li>
+              <li class="dairy">
+                <label title="버터">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="버터"
+                    name="유제품"
+                  />
+                  <img class="food_img" src="/img/butter.png" alt="버터">
+                  버터
+                </label>
+              </li>
+              <li class="dairy">
+                <label title="요거트">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="요거트"
+                    name="유제품"
+                  />
+                  <img class="food_img" src="/img/yoghurt.png" alt="요거트">
+                  요거트
+                </label>
+              </li>
+              <li class="dairy">
+                <label title="아이스크림">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    value="아이스크림"
+                    name="유제품"
+                  />
+                  <img class="food_img" src="/img/icecream.png" alt="아이스크림">
+                  아이스크림
+                </label>
+              </li>
+            </ul>
+            
+        </div>
+      </div>
+    </div>
+    <div id="recipe-results"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="/js/script.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  </body>
+</html>

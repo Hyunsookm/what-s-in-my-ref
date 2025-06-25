@@ -1,0 +1,20 @@
+footer{
+    width:100%;
+    background-color: #838383ab;
+}
+
+footer div{
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+footer div  h4 strong{
+    color: rgb(9, 88, 13);
+    font-size:large;
+}
+
+footer div li{
+    margin-top: 10px;
+    color: rgb(0, 0, 0);
+    font-size:medium;
+}

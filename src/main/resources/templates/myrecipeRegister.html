@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/myRecipeStyle.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::header}"></header>
+    <div class="sidebar-wrap">
+      <div th:replace="~{fragments/sideNav::sidebar}" />
+    </div>
+    <h2>나만의 레시피</h2>
+
+    <form id="myRecipe" method="post" th:action="@{Wimr/userrecipe/register}" enctype="multipart/form-data">
+      <table>
+        <tr>
+          <td id="mainImg">대표 사진</td>
+        </tr>
+        <tr>
+          <td><input type="file" name="mainImg" accept="image/*" required/></td>
+        </tr>
+        <tr>
+          <td id="RCP_NM">레시피 제목</td>
+        </tr>
+        <tr>
+          <td>
+            <input
+              type="text"
+              id="title"
+              name="recipe_title"
+              placeholder="예) 순두부찌개"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td id="RCP_IG">재료</td>
+        </tr>
+        <tr>
+          <td>
+            <input
+              type="text"
+              id="ingredient"
+              name="ingredient"
+              placeholder="예) 순두부 1개, 대파 1스푼, 고춧가루 1.5스푼"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td id="RCP_TIP">기타 (팁/주의사항)</td>
+        </tr>
+        <tr>
+          <td>
+            <input
+              type="text"
+              id="tip"
+              name="tip"
+              placeholder="예) 주의사항이나 꿀팁을 알려주세요~"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td id="RCP_STEP">요리순서</td>
+        </tr>
+        <tbody id="steps">
+          <tr class="step">
+            <td>
+              <input
+                type="text"
+                name="stepDescription"
+                placeholder="예) 채소를 먹기 좋게 다져주세요."
+                required
+              />
+              <input type="file" name="manualImg" accept="image/*" />
+            </td>
+          </tr>
+          <tr class="step">
+            <td>
+              <input
+                type="text"
+                name="stepDescription"
+                placeholder="예) 채소를 먹기 좋게 다져주세요."
+                required
+              />
+              <input type="file" name="manualImg" accept="image/*" />
+            </td>
+          </tr>
+          <tr class="step">
+            <td>
+              <input
+                type="text"
+                name="stepDescription"
+                placeholder="예) 채소를 먹기 좋게 다져주세요."
+                required
+              />
+              <input type="file" name="manualImg" accept="image/*" />
+            </td>
+          </tr>
+          <tr>
+            <div id="moreRCP"></div>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <button type="button" onclick="addStep()">➕ 요리순서 추가</button>
+        <button type="button" onclick="deleteStep()">➖ 요리순서 삭제</button>
+      </div>
+      <div>
+        <button type="submit" class="send">등록</button>
+      </div>
+    </form>
+    <div th:if="${errorMessage}">
+      <script th:inline="javascript">
+        alert(/*[[${errorMessage}]]*/);
+        location.replace(/*[[${searchUrl}]]*/);
+      </script>
+    </div>
+    <script>
+      const steps = document.getElementById("steps");
+      const stepElements = steps.getElementsByClassName("step");
+
+      function addStep() {
+        
+        if(stepElements.length < 20)
+        {var newStepDiv = document.createElement("tr");
+        newStepDiv.className = "step";
+        newStepDiv.innerHTML = `
+              <td>
+                  <input
+                      type="text"
+                      name="stepDescription"
+                      placeholder="예) 채소를 먹기 좋게 다져주세요."
+                      required
+                  />
+                  <input type="file" name="manualImg" accept="image/*"/>
+              </td>
+          `;
+        document.getElementById("steps").appendChild(newStepDiv);}
+        else{
+          alert("조리법은 20개 이하로 해주세요.")
+        }
+      }
+
+      function deleteStep() {
+        
+
+        if (stepElements.length > 3) {
+          steps.removeChild(stepElements[stepElements.length - 1]);
+        }
+      }
+    </script>
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  </body>
+</html>

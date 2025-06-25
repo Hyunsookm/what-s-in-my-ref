@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+  />
+    <link href="/css/myPage.css" rel="stylesheet" />
+    <link href="/css/header.css" rel="stylesheet" />
+    <link href="/css/common.css" rel="stylesheet" />
+
+    <title>my page</title>
+</head>
+<body >
+    <header th:replace="~{fragments/header::header}"/>
+    <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
+    
+    <div class="emptyBox"></div>
+
+    <div class="container myPage-container pico" id="write-mode">
+        <form id="edit-profile-form" th:action="@{/Wimr/editProfile}" method="post">
+            <div class="edit-btn-wrap display-flex"><button type="button" onclick="form_check()">저장</button> <a th:href="'/Wimr/myPage/'+${session.user.memberNick}"><button type="button" >취소</button></a></div>
+            <div id="userImg" class="item justify-content-center display-flex"><img th:src="${imagePath != null ? imagePath : '/img/userDefaultImg.png'}"/></div>      <!--이미지를 못 받았을 때 default 이미지 경로(현재 /img/pen.jpg)-->
+            <div id="userName" class="item  justify-content-center"><div style="font-size: 20px;">Nickname:</div>
+                <div id="nameError" class="Error"><li>닉네임은 영문자 or 한글 or 숫자 조합의 3~10자리를 사용해야합니다.</li></div>
+                <strong><u><input id="name" name="memberNick" placeholder="Enter nickname" th:value="${session.user.memberNick}"></u></strong>
+            </div>
+            
+            <div id="userItem">
+                <div class="infoTitle item">Email:<div id="emailError" class="Error" ><li>이메일 형식에 맞지 않습니다.</li></div> 
+                <input id="email" type="text" name="memberEmail" placeholder="Enter email" th:value="${session.user.memberEmail}"></div>
+                
+            </div>
+        </form>
+    </div>
+
+    <script src="/js/index.js"></script>
+    <script src="/js/myPage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</body>

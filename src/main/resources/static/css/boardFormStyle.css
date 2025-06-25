@@ -1,0 +1,88 @@
+/* body {
+  background-color: darksalmon;
+} */
+
+#writeForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h2 {
+  padding: 70px 0 50px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+table,
+td,
+tr {
+  border: 1px solid black;
+}
+
+td:nth-child(odd) {
+  background-color: #ddd;
+  text-align: center;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  height: calc(100%-10px);
+  padding: 10px;
+  border: none;
+}
+
+::placeholder {
+  font-size: 14px;
+}
+
+#content {
+  width: 800px;
+  height: 400px;
+}
+
+textarea {
+  resize: none;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  padding-top: 60px;
+}
+
+.form-wrap {
+  margin: 0 200px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn input[type="submit"],
+.btn a {
+  margin-left: 10px;
+  margin-top: 5px;
+  background-color: skyblue;
+  color: white;
+  padding: 4px;
+}
+
+.btn a:hover {
+  background-color: rgb(70, 70, 196);
+  transition: 0.2s ease;
+}
+
+.btn input[type="submit"]:hover {
+  background-color: rgb(70, 70, 196);
+  transition: 0.2s ease;
+}

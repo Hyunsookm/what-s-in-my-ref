@@ -1,0 +1,80 @@
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link href="/css/login.css" rel="stylesheet" />
+    <link href="/css/header.css" rel="stylesheet" />
+    <link href="/css/common.css" rel="stylesheet" />
+
+    <title>login</title>
+  </head>
+  <body class="noscroll">
+    <header th:replace="~{fragments/header::header}"></header>
+    <div class="sidebar-wrap">
+      <div th:replace="~{fragments/sideNav::sidebar}" />
+    </div>
+
+    <div
+      id="loginBox"
+      class="centerBox pico display-flex justify-content-center align-items-center"
+    >
+      <div class="form-wrap">
+        <form
+          name="login-form"
+          id="login-form"
+          th:action="@{/Wimr/login}"
+          method="post"
+          th:object="${userDTO}"
+        >
+          Login ID:
+          <input
+            type="text"
+            id="loginId"
+            name="member_id"
+            th:field="*{memberId}"
+            class="form_input"
+          />
+          <br />
+          Login Password:
+          <input
+            type="password"
+            id="password"
+            name="member_pw"
+            th:field="*{memberPw}"
+            class="form_input"
+            style="margin-bottom: 0"
+          />
+          <div class="link-div">
+            <a href="/Wimr/findAcc" onclick="openInNewWindow(event,this.href)"
+              >아이디/비밀번호 찾기</a
+            >
+            <a href="/Wimr/register">회원가입</a>
+          </div>
+          <button id="login-btn" type="button" onclick="loginChk()">
+            로그인
+          </button>
+        </form>
+        <div th:if="${errorMessage}">
+          <script th:inline="javascript">
+            alert(/*[[${errorMessage}]]*/);
+            location.replace(/*[[${searchUrl}]]*/);
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/login.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link href="/css/reWritePw.css" rel="stylesheet" />
+    <link href="/css/common.css" rel="stylesheet" />
+
+    <title>비밀번호 재설정</title>
+  </head>
+  <body class="display-flex justify-content-center pico">
+    <div
+      id="reWritePw-div"
+      style="display: block; width: 800px; height: 500px; margin-top: 10px"
+    >
+      <div>
+        <div
+          class="display-flex justify-content-center"
+          style="font-size: 50px; margin-bottom: 20px"
+        >
+          <span>비밀번호 재설정</span>
+        </div>
+        <div class="display-flex justify-content-center">
+          <form
+            id="reWritePw-form"
+            th:action="@{/Wimr/doRewritepw}"
+            method="post"
+          >
+            <div class="input-wrap">
+              비밀번호:
+              <input
+                type="password"
+                id="password"
+                name="memberPw"
+                class="form_input"
+                th:value="${memberPw}"
+              />
+              <div id="pwdError" class="Error">
+                <li>
+                  비밀번호는 영문자+숫자+특수문자 조합의 8~20자리를 사용해야
+                  합니다.
+                </li>
+              </div>
+            </div>
+            <div class="input-wrap">
+              비밀번호 확인:
+              <input type="password" id="repassword" class="form_input" />
+              <div id="repwdError" class="Error">
+                <li>비밀번호가 일치하지 않습니다.</li>
+              </div>
+            </div>
+            <button
+              id="reWritePw-btn"
+              type="button"
+              onclick="reWritePw_check()"
+            >
+              비밀번호 재설정
+            </button>
+          </form>
+        </div>
+        <div th:if="${errorMessage}">
+          <script th:inline="javascript">
+            alert(/*[[${errorMessage}]]*/);
+            window.close();
+          </script>
+        </div>
+        <div th:if="${successMessage}">
+          <script th:inline="javascript">
+            alert(/*[[${successMessage}]]*/);
+            window.close();
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/reWritePw.js"></script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+.board_wrap h2 {
+  padding: 70px 0 50px;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.board_wrap table {
+  border: 1px solid black;
+  width: 100%;
+}
+
+.table_wrap {
+  margin: 0 60px;
+}
+
+td,
+th {
+  border: 1px solid black;
+}
+
+th {
+  background-color: #ddd;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  text-align: center;
+}
+
+#content {
+  height: 400px;
+  border: 1px solid black;
+  border-top: none;
+  padding: 10px;
+  font-size: medium;
+  resize: none;
+  width: 100%;
+}
+
+.btn {
+  float: right;
+  padding: 10px;
+  background-color: skyblue;
+  border: none;
+  font-size: large;
+  color: white;
+}
+
+.btn:hover {
+  background-color: rgb(70, 70, 196);
+  transition: 0.2s ease;
+}

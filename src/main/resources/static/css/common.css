@@ -1,0 +1,239 @@
+body {
+  font-family: "Do Hyeon", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {color: rgb(255, 213, 0);
+  color: #4fa6d5;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #45beff;
+  text-decoration: none;
+}
+
+.emptyBox {
+  visibility: hidden;
+  height: 100px;
+  width: 1px;
+}
+
+.flexible-font-size {
+  font-size: 20px;
+}
+
+/*------------------------------------------------------------
+반응형 변경 사항들
+--------------------------------------------------------------*/
+@media (max-width: 1536px) {
+  /*header.html*/
+  #header {
+    height: 50px;
+    font-size: 20px;
+  }
+  #header .logo img {
+    width: 50px;
+  }
+  .navbar {
+    margin-top: 4px;
+  }
+  .navbar .dropdown ul{
+    left:-95px;
+  }
+  .navbar .dropdown-box{
+    width: 180px;
+    font-size: 20px;
+  }
+  .navbar .my-info .a-myPage a{
+    font-size: 35px;
+  }
+  .flexible-font-size {
+    font-size: 15px;
+  }
+  /*index.html*/
+  .input-width {
+    max-width: 1000px !important;
+  }
+  .box {
+    width: 250px;
+    margin: 0 60px 30px;
+  }
+  /*recipe.html*/
+  .recipe_container {
+    max-width: 1000px;
+  }
+}
+
+@media (max-width: 1150px) {
+  /*header.html*/
+  #header {
+    height: 36px;
+    font-size: 14px;
+  }
+  .navbar {
+    margin-top: 2px;
+    font-size: 15px;
+  }
+  .navbar .dropdown ul{
+    left:-50px;
+  }
+  .navbar .dropdown-box{
+    width: 150px;
+    font-size: 20px;
+  }
+  .navbar .dropdown-box .before-login .btn-wrap{
+    --pico-form-element-spacing-horizontal: 0.2rem;
+  }
+  .navbar .my-info .a-myPage a{
+    font-size: 30px;
+  }
+  .flexible-font-size {
+    font-size: 11px;
+  }
+  /*index.html*/
+  .input-width {
+    max-width: 700px !important;
+  }
+  .box {
+    width: 200px;
+    margin: 0 38px 30px;
+  }
+  .emptyBox {
+    height: 70px;
+  }
+
+  /*recipe.html*/
+  .recipe_container {
+    max-width: 700px;
+  }
+}
+
+/*모바일*/
+@media (max-width: 853px) {
+  /*header.html*/
+  #header .logo{
+    padding-left: 20px;
+  }
+
+  .navbar {
+    display: none;
+    content-visibility: hidden;
+  }
+
+  #mobile-nav-toggle {
+    display: block;
+    content-visibility: visible;
+  }
+
+  #sidebar {
+    visibility: visible;
+  }
+
+  /*index.html*/
+  .input-width {
+    max-width: 400px !important;
+  }
+
+  .search-form-wrap form div {
+    flex-direction: column;
+  }
+  .search-form-wrap form div input {
+    --pico-spacing: 1rem;
+  }
+
+  .Contents .ranking-div #first-recipe{
+    order:1;
+  }
+  
+  .Contents .ranking-div #second-recipe{
+    order: 2;
+  }
+
+  .Contents .ranking-div #third-recipe{
+    order: 3;
+  }
+
+  .Contents .box_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .box {
+    width: 360px;
+  }
+
+  /*recipe.html*/
+  .emptyBox {
+    height: 40px;
+  }
+
+  .recipe_container {
+    width: calc(96vw);
+    box-shadow: none;
+  }
+
+  .recipe_container .comment .card .card-body form #comment-btn-wrap{
+    width:55px;
+  }
+
+  .myPage-container {
+    width: calc(90vw);
+  }
+
+
+  /*login.html*/
+  .centerBox{
+    max-width: 400px !important;
+  }
+  
+  .recipe-grid{
+    width:100%;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.align-items-center {
+  align-items: center;
+  align-content: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.underline{
+  text-decoration: underline;
+}
+
+.hidden{
+  display: none;
+}
+
+.overlayForLoading{
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background: rgba(0, 0, 0, 0.4); 
+  z-index: 101; 
+  display: none; /* 초기 상태는 보이지 않음 */
+}

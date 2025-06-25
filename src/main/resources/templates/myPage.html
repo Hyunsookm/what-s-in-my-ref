@@ -1,0 +1,89 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+  />
+    <link href="/css/myPage.css" rel="stylesheet" />
+    <link href="/css/header.css" rel="stylesheet" />
+    <link href="/css/common.css" rel="stylesheet" />
+
+    <title>my page</title>
+</head>
+<body >
+    <header th:replace="~{fragments/header::header}"/>
+    <div class="sidebar-wrap"><div th:replace="~{fragments/sideNav::sidebar}"/></div>
+    
+    <div class="emptyBox"></div>
+    
+    <div class="container myPage-container pico" id="read-mode"> 
+        <div class="edit-btn-wrap display-flex" th:if="${session.user != null and session.user.memberNo == pageUser.memberNo}"><button onclick="redirectToPage('/Wimr/editMyPage')">편집</button></div>
+        <div id="userImg" class="item justify-content-center display-flex"><img th:src="${imagePath != null ? imagePath : '/img/userDefaultImg.png'}"/></div>      <!--이미지를 못 받았을 때 default 이미지 경로(현재 /img/pen.jpg)-->
+        <div id="userName" class="item justify-content-center display-flex" ><strong><u><span th:text="${pageUser != null ? pageUser.memberNick : 'Unknown'}"></span></u></strong></div>
+        <div id="userItem">
+            <div class="infoTitle item">Email:<article id="email"><span th:text="${pageUser != null ? pageUser.memberEmail : ''}"></span></article></div>
+            
+            <div class="my-board-part item" >작성한 게시글:      
+                <table class="board-grid" id="myBoardGrid">
+                    <colgroup>
+                        <col style="width: 7%;">
+                        <col style="width: 54%;">
+                        <col style="width: 13%;">
+                        <col style="width: 10%;">
+                        <col style="width: 16%;">
+                    </colgroup>
+                    <thead ><th>ID</th> <th>제목</th> <th>작성자</th> <th>조회</th> <th>날짜</th></thead>
+                    <tbody>
+                        <tr th:each="my_board, iterStat : ${myBoardList}" th:class="'board-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}" >  <!--타임리프 값:"myBoardList" (Board 객체의 배열 or List)-->
+                            <td class="board-id" th:text="${my_board.bno}" style="text-align: center;"></td>
+                            <td class="board-title" style="overflow: hidden;"><a th:href="@{'/boardView?bno='+${my_board.bno}}" th:text="${my_board.title}"></a></td>
+                            <td class="board-nickname" th:text="${my_board.nickname}" style="text-align: center;"></td>
+                            <td class="board-viewCount" th:text="${my_board.viewcount}" style="text-align: center;"></td>
+                            <td class="board-createdDate " th:text="${#temporals.format(my_board.created_date, 'yy-MM-dd')}" style="text-align: center;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="display-flex justify-content-center">
+                    <button id="toggleButton0" data-target="myBoardGrid" th:if="${not myBoardList.isEmpty}">더 보기</button>
+                    <span th:if="${myBoardList.isEmpty}" style="color: rgb(102, 102, 102);">결과 없음...</span>
+                </div>
+            </div>
+
+            <div class="my-recipe-part item" >등록한 레시피:      
+                <div class="recipe-grid" id="myRecipeGrid">  
+                    <div th:onclick="|redirectToPage('/Wimr/recipe/which/'+${my_recipe.recipeno})|" th:each="my_recipe, iterStat : ${myRecipeList}" th:class="'recipe-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}" >  <!--타임리프 값:"myRecipeList" (Recipe 객체의 배열 or List)-->
+                        <div class="food-img"><img th:src="${my_recipe.picture != null ? my_recipe.picture : '/img/ingredients.jpg'}"/></div>
+                        <div class="food-name display-flex justify-content-center align-items-center" th:text="${my_recipe.title != null ? my_recipe.title : 'Unknown'}"></div>
+                    </div>
+                </div>
+                <div class="display-flex justify-content-center">
+                    <button id="toggleButton1" data-target="myRecipeGrid" th:if="${not myRecipeList.isEmpty}">더 보기</button>
+                    <span th:if="${myRecipeList.isEmpty}" style="color: rgb(102, 102, 102);">결과 없음...</span>
+                </div>
+            </div>
+
+            <div class="favorite-recipe-part item">즐겨찾기:
+                <div class="recipe-grid"  id="favoriteRecipeGrid">
+                    <div  th:onclick="|redirectToPage('/Wimr/recipe/which/'+${favorite_recipe.recipeno})|" th:each="favorite_recipe, iterStat : ${favoriteRecipeList}" th:class="'recipe-shape shape' + ${iterStat.index >= 3 ? ' hidden' : ''}">  <!--타임리프 값:"favoriteRecipeList" (Recipe 객체의 배열 or List)-->
+                        <div class="food-img"><img th:src="${favorite_recipe.picture != null ? favorite_recipe.picture : '/img/ingredients.jpg'}"/></div>
+                        <div class="food-name display-flex justify-content-center align-items-center" th:text="${favorite_recipe.title != null ? favorite_recipe.title : 'Unknown'}"></div>
+                    </div>
+                </div>
+                <div class="display-flex justify-content-center">
+                    <button id="toggleButton2" data-target="favoriteRecipeGrid" th:if="${not favoriteRecipeList.isEmpty}">더 보기</button>
+                    <span th:if="${favoriteRecipeList.isEmpty}" style="color: rgb(102, 102, 102);">결과 없음...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/index.js"></script>
+    <script src="/js/myPage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</body>

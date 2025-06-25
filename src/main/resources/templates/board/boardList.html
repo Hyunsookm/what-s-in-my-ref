@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/boardListStyle.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header::header}"></header>
+    <div class="sidebar-wrap">
+      <div th:replace="~{fragments/sideNav::sidebar}" />
+    </div>
+    <div class="board-wrap">
+      <h2>자유게시판</h2>
+      
+      <div class="table_wrap">
+        <div class="sort-buttons">
+          <a href="/boardList">최신순</a>
+          <a
+            th:href="@{/boardList(sort='viewcount')}"
+            class="button"
+            th:classappend="${sort == 'viewcount'} ? 'active' : ''"
+            >조회순</a
+          >
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>글제목</th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="board : ${boardList}">
+              <td th:text="${boardStat.index+1}"></td>
+              <!-- localhost:8080/boardList?bno=board.bno -->
+              <td>
+                <a
+                  th:text="${board.title}"
+                  th:href="@{/boardView(bno=${board.bno})}"
+                ></a>
+              </td>
+              <td ><a th:href="'/Wimr/myPage/'+ ${board.nickname}" ><span th:text="${board.nickname}"></span></a></td>
+              <td
+                th:text="${#temporals.format(board.created_date, 'yyyy-MM-dd')}"
+              ></td>
+              <td th:text="${board.viewcount}"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="btn">
+          <a th:href="@{/boardForm}" bno="btn">글쓰기</a>
+        </div>
+      </div>
+      <div class="pages">
+        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+          <!-- 페이지가 현재 페이지와 다를 때 -->
+          <a
+            th:if="${page != nowPage}"
+            th:href="@{/boardList(page = ${page-1})}"
+            th:text="${page}"
+          ></a>
+          <!-- 페이지가 현재 페이지와 같을 때 -->
+          <strong
+            th:if="${page == nowPage}"
+            th:text="${page}"
+            style="color: red"
+          ></strong>
+        </th:block>
+      </div>
+    </div>
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  </body>
+</html>

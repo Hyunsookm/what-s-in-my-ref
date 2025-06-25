@@ -1,0 +1,103 @@
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+    />
+    <link href="/css/findAcc.css" rel="stylesheet" />
+    <link href="/css/common.css" rel="stylesheet" />
+    <!--menu icon
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+      </svg>-->
+
+    <title>아이디/ 비밀번호 찾기</title>
+  </head>
+  <body class="display-flex justify-content-center pico">
+    <div
+      id="findAcc-div"
+      style="display: block; width: 800px; height: 500px; margin-top: 10px"
+    >
+      <div class="tabs text-center">
+        <div class="tab active" onclick="showTab('find-id')">아이디 찾기</div>
+        <div class="tab" onclick="showTab('find-password')">비밀번호 찾기</div>
+      </div>
+      <div class="tab-content-wrap">
+        <div id="find-id" class="tab-content active">
+          <div style="margin-left: 10px; font-size: larger">이메일:</div>
+          <form
+            id="find-id-form"
+            th:action="@{/Wimr/findAcc/find-id}"
+            method="post"
+            th:object="${userDTO}"
+          >
+            <input type="text" id="memberEmail" th:field="*{memberEmail}" />
+            <div id="emailError" class="Error">
+              <li>이메일을 입력해주세요.</li>
+            </div>
+            <div class="btn-wrap display-flex justify-content-center">
+              <button type="button" onclick="idCheck()">아이디 찾기</button>
+            </div>
+          </form>
+
+          <div
+            id="result"
+            class="display-flex align-items-center justify-content-center"
+            th:if="${idSearchPerformed}"
+          >
+            <div th:if="${masked_member_id!=null}" class="display-flex">
+              아이디는&nbsp;
+              <div class="underline" th:text="${masked_member_id}"></div>
+              &nbsp;입니다.
+            </div>
+            <div th:if="${masked_member_id == null}">
+              이메일이 존재하지 않습니다.
+            </div>
+          </div>
+        </div>
+        <!-- -------------------------------------------------------------------------------------------------------------------- -->
+
+        <div id="find-password" class="tab-content">
+          <form
+            id="find-pwd-form"
+            th:action="@{/Wimr/findAcc/find-pwd}"
+            method="post"
+            th:object="${userDTO}"
+          >
+            <div style="margin-left: 10px; font-size: larger">아이디:</div>
+            <input type="text" id="memberId" th:field="*{memberId}" />
+            <div id="idError" class="Error">
+              <li>아이디를 입력해주세요.</li>
+            </div>
+            <div style="margin-left: 10px; font-size: larger">이메일:</div>
+            <input type="text" id="memberEmail" th:field="*{memberEmail}" />
+            <div id="emailError2" class="Error">
+              <li>이메일을 입력해주세요.</li>
+            </div>
+            <div class="btn-wrap display-flex justify-content-center">
+              <button type="button" onclick="pwdCheck()">비밀번호 찾기</button>
+            </div>
+          </form>
+          <div th:if="${errorMessage}">
+            <script th:inline="javascript">
+              alert(/*[[${errorMessage}]]*/);
+              location.replace(/*[[${searchUrl}]]*/);
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/findAcc.js"></script>
+  </body>
+</html>
