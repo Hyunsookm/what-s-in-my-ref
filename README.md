@@ -1,7 +1,7 @@
 # 🧊 What's in my refrigerator
 
-냉장고 속 재료를 기반으로 요리를 추천해주는 웹 서비스입니다.  
-배달 음식 의존도를 줄이고, 직접 요리를 하도록 유도하는 목적에서 시작되었습니다.
+냉장고 속 재료를 기반으로 요리를 추천해주는 웹 서비스
+배달 음식 의존도를 줄이고, 직접 요리를 하도록 유도하는 목적에서 시작
 
 ---
 
@@ -32,7 +32,7 @@
   - MySQL
 
 - **Deployment**  
-  - Docker, Docker-Compose (Spring Boot + MySQL 멀티 컨테이너)  
+  - Docker, Docker-Compose (Spring Boot + MySQL의 멀티 컨테이너)  
   - AWS EC2
 
 ---
@@ -50,10 +50,11 @@ cd your-project
 ./gradlew bootRun
 ```
 
+---
 
 🙋 기여자 및 역할 (Contributors & Roles)
 
-•	김현수: 프로젝트 기획, 레시피 데이터 수집 및 정제, Docker 기반 배포
+•	김현수: 프로젝트 기획, 레시피 데이터 수집 및 정제, Docker 기반 EC2 배포
 
 •	이상현: 프론트엔드 개발, UI/UX 설계
 
