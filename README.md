@@ -37,21 +37,6 @@
 
 ---
 
-## ⚙️ 설치 및 실행 방법 (Installation & Run)
-
-### 1. 프로젝트 클론
-
-```bash
-https://github.com/Hyunsookm/what-s-in-my-ref.git
-cd your-project
-```
-
-```bash
-./gradlew bootRun
-```
-
----
-
 🙋 기여자 및 역할 (Contributors & Roles)
 
 •	김현수: 프로젝트 기획, 레시피 데이터 수집 및 정제, Docker 기반 EC2 배포
