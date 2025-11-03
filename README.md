@@ -23,7 +23,7 @@
 
 - **Frontend**  
   - HTML, CSS, JavaScript  
-  - Thymeleaf (타임리프)
+  - Thymeleaf
 
 - **Backend**  
   - Java Spring Boot
